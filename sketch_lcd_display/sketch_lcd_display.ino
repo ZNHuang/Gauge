@@ -1,32 +1,32 @@
 #include <LiquidCrystal_I2C.h>
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
+String Delimiter = ",";
 
 void setup() {
-  // put your setup code here, to run once:
   if (! i2CAddrTest(0x27)) {
     lcd = LiquidCrystal_I2C(0x3F, 16, 2);
   }
 
   Serial.begin(9600);
-
   lcd.init();
   lcd.backlight();
-  //lcd.print("Hello world!");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  lcd.setCursor(0, 0);
   if (Serial.available()) {
-    auto command = Serial.readStringUntil('\n');
+    String command = Serial.readStringUntil('\n');
     command.trim();
+    int index = command.indexOf(Delimiter);
+    float cpu = command.substring(0, index).toFloat();
+    String memory = command.substring(index + 1, command.length());
+    lcd.setCursor(0, 0);
     lcd.print("CPU%:");
-    lcd.print(command);
+    lcd.print(cpu);
+    lcd.setCursor(0, 1);
+    lcd.print("Mem%:");
+    lcd.print(memory);
   }
-  lcd.setCursor(0, 1);
-  //lcd.print("Counter:");
-  //lcd.print(millis() / 1000);
 }
 
 bool i2CAddrTest(uint8_t addr) {

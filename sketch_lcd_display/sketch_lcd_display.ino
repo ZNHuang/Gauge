@@ -9,6 +9,17 @@ byte three[8] = {0b11100,0b11100,0b11100,0b11100,0b11100,0b11100,0b11100,0b11100
 byte four[8] = {0b11110,0b11110,0b11110,0b11110,0b11110,0b11110,0b11110,0b11110};
 byte five[8] = {0b11111,0b11111,0b11111,0b11111,0b11111,0b11111,0b11111,0b11111};
 
+byte ten[8] = {0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b10000};
+byte eleven[8] = {0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b10000};
+byte twelve[8] = {0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b10000};
+byte thirteen[8] = {0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b10000};
+
+byte fourteen[8] = {0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b10000};
+byte fifteen[8] = {0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b10000};
+byte sixteen[8] = {0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b10000};
+byte seventeen[8] = {0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b00000,0b10000};
+
+
 void setup() {
   if (! i2CAddrTest(0x27)) {
     lcd = LiquidCrystal_I2C(0x3F, 16, 2);
@@ -27,6 +38,46 @@ void setup() {
 
 void loop() {
   if (Serial.available()) {
+    //alternating();
+    displayCores();
+  }
+}
+
+void displayCores() {
+  String command = Serial.readStringUntil('\n');
+  command.trim();
+  float usage[] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
+  String percentage;
+  int index = 0;
+  for (int i = 0; i < command.length(); i++) {
+    if (command[i] == ',') {
+      if (percentage != "") {
+        usage[index] = percentage.toFloat();
+        lcd.setCursor(index, 0);
+        lcd.print(int(usage[index] / 20));
+        lcd.setCursor(index, 1);
+        displayPercentage(int(usage[index] / 20));
+      }
+      percentage = "";
+      index++;
+    } else {
+      percentage = percentage + command[i];
+    }
+  }
+}
+
+void displayPercentage(float p) {
+  lcd.write(p);
+}
+
+void alternating() {
+    displayCPU();
+    delay(1000);
+    displayRAM();
+    delay(1000);
+}
+
+void displayCPU() {
     String command = Serial.readStringUntil('\n');
     command.trim();
     int index = command.indexOf(Delimiter);
@@ -42,7 +93,24 @@ void loop() {
 
     displayBar(1, cpu);
     //displayBar(1, memory);
-  }
+}
+
+void displayRAM() {
+    String command = Serial.readStringUntil('\n');
+    command.trim();
+    int index = command.indexOf(Delimiter);
+    float cpu = command.substring(0, index).toFloat();
+    float memory = command.substring(index + 1, command.length()).toFloat();
+    
+    //lcd.setCursor(0, 0);
+    //lcd.print("CPU%:");
+    //lcd.print(cpu);
+    lcd.setCursor(0, 0);
+    lcd.print("Mem%:");
+    lcd.print(memory);
+
+    //displayBar(1, cpu);
+    displayBar(1, memory);
 }
 
 void displayBar(int row, float value) {

@@ -8,7 +8,7 @@
  \______  /\____|__  /______/  \______  /_______  /
         \/         \/                 \/        \/ 
 ```
-This is a usage guage build using arduino UNO + "I2C LCD1602" LCD screen.
+This is a usage guage build using arduino UNO (or similar product) + "I2C LCD1602" LCD screen.
 
 ## How to use
 

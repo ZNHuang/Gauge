@@ -40,7 +40,9 @@ void loop() {
     //lcd.setCursor(0, 0);
     //lcd.print("Mem%:");
     //lcd.print(memory);
-    displayBar(1, cpu.toFloat());
+
+    //displayBar(1, cpu.toFloat());
+    displayBar(1, memory);
   }
 }
 

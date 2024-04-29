@@ -23,10 +23,16 @@ This is a usage guage build using arduino UNO + "I2C LCD1602" LCD screen.
 
 ### Usage
   0. Connect the arduino UNO board with the computer using a LCD, connect the LCD with arduino board.
-  1. Download this repository. Open the sketch folder from Arduino_IDE.
-  2. open a terminal, cd to the root directory of this repo, run the following command
+     | Arduino UNO    | I2C LCD     |
+     | ------- | ---------- |
+     |GND      | GND         |
+     |POWER 5V | VCC         |
+     |A4       | SDA         |
+     |A5       | SCL         |
+  2. Download this repository. Open the sketch folder from Arduino_IDE.
+  3. open a terminal, cd to the root directory of this repo, run the following command
      ```bash hold_open.sh```
-  3. open another terminal, cd to the root directory of this repo, run the following command:
+  4. open another terminal, cd to the root directory of this repo, run the following command:
      ```bash send.sh```
 
   After those steps, you should be able to see the cpu usage on the LCD display both as a percentage in the top row and also a bar in the lower row.

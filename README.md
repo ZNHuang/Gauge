@@ -37,4 +37,4 @@ This is a usage guage build using arduino UNO (or similar product) + "I2C LCD160
 
   After those steps, you should be able to see the cpu usage on the LCD display both as a percentage in the top row and also a bar in the lower row.
 
-[!Diagram](/gauge_bb.png)
+![Diagram](/gauge_bb.png)

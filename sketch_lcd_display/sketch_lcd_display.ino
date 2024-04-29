@@ -30,8 +30,9 @@ void loop() {
     String command = Serial.readStringUntil('\n');
     command.trim();
     int index = command.indexOf(Delimiter);
-    String cpu = command.substring(0, index);
+    float cpu = command.substring(0, index).toFloat();
     float memory = command.substring(index + 1, command.length()).toFloat();
+    
     lcd.setCursor(0, 0);
     lcd.print("CPU%:");
     lcd.print(cpu);
@@ -39,8 +40,8 @@ void loop() {
     //lcd.print("Mem%:");
     //lcd.print(memory);
 
-    //displayBar(1, cpu.toFloat());
-    displayBar(1, memory);
+    displayBar(1, cpu);
+    //displayBar(1, memory);
   }
 }
 

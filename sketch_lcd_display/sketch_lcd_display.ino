@@ -26,8 +26,6 @@ void setup() {
 }
 
 void loop() {
-  lcd.setCursor(15, 0);
-  lcd.write(1);
   if (Serial.available()) {
     String command = Serial.readStringUntil('\n');
     command.trim();

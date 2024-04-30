@@ -62,15 +62,16 @@ void displayCores() {
   float usage[] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
   String percentage;
   int index = 0;
+  float sum = 0;
   for (int i = 0; i < command.length(); i++) {
     if (command[i] == ',') {
       if (percentage != "") {
         usage[index] = percentage.toFloat();
-        lcd.setCursor(index, 0);
-        //lcd.print(10 + 8 * int(usage[index] / 100));
-        lcd.print(int(usage[index] * 8 / 100));
+        //lcd.setCursor(index, 0);
+        //lcd.print(int(usage[index] * 8 / 100));
         lcd.setCursor(index, 1);
         displayPercentage(int(usage[index] * 8 / 100));
+        sum += usage[index];
       }
       percentage = "";
       index++;
@@ -78,6 +79,9 @@ void displayCores() {
       percentage = percentage + command[i];
     }
   }
+  lcd.setCursor(0, 0);
+  lcd.print("CPU%: ");
+  lcd.print(sum / index);
 }
 
 void displayPercentage(int p) {

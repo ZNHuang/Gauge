@@ -11,6 +11,7 @@
 This is a usage guage build using arduino UNO (or similar product) + "I2C LCD1602" LCD screen.
 
 ![result](/result.png)
+^ Result on a 16 thread CPU.
 
 ## How to use
 
@@ -32,9 +33,11 @@ This is a usage guage build using arduino UNO (or similar product) + "I2C LCD160
      |A4       | SDA         |
      |A5       | SCL         |
   2. Download this repository. Open the sketch folder from Arduino_IDE.
-  3. open a terminal, cd to the root directory of this repo, run the following command
+  3. Install required tools.
+     ```sudo apt install sysstat```
+  5. open a terminal, cd to the root directory of this repo, run the following command.
      ```bash hold_open.sh```
-  4. open another terminal, cd to the root directory of this repo, run the following command:
+  6. open another terminal, cd to the root directory of this repo, run the following command:
      ```bash send.sh```
 
   After those steps, you should be able to see the cpu usage on the LCD display both as a percentage in the top row and also a bar in the lower row.

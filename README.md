@@ -10,6 +10,8 @@
 ```
 This is a usage guage build using arduino UNO (or similar product) + "I2C LCD1602" LCD screen.
 
+![result](/result.png)
+
 ## How to use
 
 ### Hardware requirement:

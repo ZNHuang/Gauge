@@ -22,7 +22,8 @@ This is a usage guage build using arduino UNO (or similar product) + "I2C LCD160
   4. A USB cable
      
 ### Software requiremnt:
-  1. [Arduino IDE](https://www.arduino.cc/en/software)
+  1. [Arduino IDE](https://www.arduino.cc/en/software) and [LiquidCrystal_I2C.h](https://www.arduino.cc/reference/en/libraries/liquidcrystal-i2c/) library
+  2. sysstat
 
 ### Usage
   0. Connect the arduino UNO board with the computer using a LCD, connect the LCD with arduino board.
